@@ -51,8 +51,8 @@ class Gamma:
             if not step:
                 return self.key
             current_step: k.Key = self.key
+            steps_type: dict[int, bool] = Gamma.MAJOR_STEPS if self.major else Gamma.MINOR_STEPS
             for i in range(1, step + 1):
-                steps_type: list[int] = Gamma.MAJOR_STEPS if self.major else Gamma.MINOR_STEPS
                 current_step = current_step.step_up_by_tone() if steps_type[i] else current_step.step_up_by_half_tone()
             return current_step
         else:
