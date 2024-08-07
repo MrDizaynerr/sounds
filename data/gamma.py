@@ -11,7 +11,9 @@ class Gamma:
     key: k.Key
     # мажорность. True - мажорная гамма, False - минорная гамма 
     major: bool
-    
+    # все ноты тональности
+    key_list: list[k.Key]
+
     # хранит словарь, где ключ - ступень, значение - смещение на количество тонов для мажорной гаммы
     MAJOR_STEPS: dict[int, bool] = {
         1: True,
@@ -22,7 +24,7 @@ class Gamma:
         6: True,
         7: False
     }
-    
+
     # хранит словарь, где ключ - ступень, значение - смещение на: True - тон, False - полтона
     MINOR_STEPS: dict[int, bool] = {
         1: True,
@@ -33,16 +35,16 @@ class Gamma:
         6: True,
         7: True
     }
-    
+
     def get_natural_chord(self) -> list[k.Key]:
         return [self.get_step(0), self.get_step(2), self.get_step(4)]
-    
+
     def get_cept_chord(self) -> list[k.Key]:
         return [self.get_step(0), self.get_step(2), self.get_step(4), self.get_step(6)]
 
     def get_quint(self) -> list[k.Key]:
         return [self.get_step(0), self.get_step(4)]
-    
+
     def get_step(self, step: int) -> k.Key:
         """
         Возвращает выбранную ступень гаммы
@@ -57,17 +59,27 @@ class Gamma:
             return current_step
         else:
             raise ValueError(f"Ступень {step} должна быть в диапазоне от 1 до 7")
-            
-    def get_full_gamma(self):
+
+    def get_key_list(self) -> list[k.Key]:
+        return self.key_list
+
+    def get_key(self) -> k.Key:
+        return self.key
+
+    def is_major(self) -> bool:
+        return self.is_major()
+
+    def _generate_full_gamma(self) -> None:
         key_list: list[k.Key] = []
         for i in range(8):
             step: k.Key = self.get_step(i)
             key_list.append(step)
-        return key_list
-            
+        self.key_list = key_list
+
     def __str__(self) -> str:
-        return str([str(key_item) for key_item in self.get_full_gamma()])
-    
+        return str([str(key_item) for key_item in self.get_key_list()])
+
     def __init__(self, key: k.Key | ke.KeyEnum, major: bool = False) -> None:
-        self.key = key if type(key) == k.Key else key.value
+        self.key = key if type(key) is k.Key else key.value
         self.major = major
+        self._generate_full_gamma()
