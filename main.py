@@ -17,6 +17,7 @@ def main0():
     print("Септаккорд: " + str([str(c) for c in g.get_cept_chord()]))
     print("Квинта: " + str([str(c) for c in g.get_quint()]))
 
+
 main: list = [main0]
 
 if __name__ == "__main__":
