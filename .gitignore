@@ -1,1 +1,7 @@
 /.venv/
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/requirements.txt
+/.idea/sounds.iml
+/out/test.midi
+/.idea/vcs.xml
