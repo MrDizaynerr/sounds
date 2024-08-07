@@ -39,7 +39,9 @@ class Gamma:
     
     def get_cept_chord(self) -> list[k.Key]:
         return [self.get_step(0), self.get_step(2), self.get_step(4), self.get_step(6)]
-        
+
+    def get_quint(self) -> list[k.Key]:
+        return [self.get_step(0), self.get_step(4)]
     
     def get_step(self, step: int) -> k.Key:
         """
