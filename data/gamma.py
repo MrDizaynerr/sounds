@@ -37,12 +37,21 @@ class Gamma:
     }
 
     def get_natural_chord(self) -> list[k.Key]:
+        """
+        Получает натуральный аккорд
+        """
         return [self.get_step(0), self.get_step(2), self.get_step(4)]
 
     def get_cept_chord(self) -> list[k.Key]:
+        """
+        Получает септаккорд
+        """
         return [self.get_step(0), self.get_step(2), self.get_step(4), self.get_step(6)]
 
     def get_quint(self) -> list[k.Key]:
+        """
+        Получает квинту
+        """
         return [self.get_step(0), self.get_step(4)]
 
     def get_step(self, step: int) -> k.Key:
@@ -61,15 +70,28 @@ class Gamma:
             raise ValueError(f"Ступень {step} должна быть в диапазоне от 1 до 7")
 
     def get_key_list(self) -> list[k.Key]:
+        """
+        Получает всю гамму
+        """
         return self.key_list
 
     def get_key(self) -> k.Key:
+        """
+        Получает тональность гаммы
+        """
         return self.key
 
     def is_major(self) -> bool:
+        """
+        Является ли гамма мажорной или минорной
+        TODO: заменить на перечисление для разного рода ладов, а пока обходимся натурой
+        """
         return self.is_major()
 
     def _generate_full_gamma(self) -> None:
+        """
+        Генерирует и сохраняет все ноты для данной гаммы
+        """
         key_list: list[k.Key] = []
         for i in range(8):
             step: k.Key = self.get_step(i)
