@@ -1,5 +1,6 @@
 from data.atomic import key as k
 from data.atomic import keysenum as ke
+from data import gammatypesenum as ge
 
 
 class Gamma:
@@ -10,31 +11,9 @@ class Gamma:
     # тональность
     _key: k.Key
     # мажорность. True - мажорная гамма, False - минорная гамма 
-    _major: bool
+    _gamma_type: ge.GammaTypesEnum
     # все ноты тональности
     _key_list: list[k.Key]
-
-    # хранит словарь, где ключ - ступень, значение - смещение на количество тонов для мажорной гаммы
-    MAJOR_STEPS: dict[int, bool] = {
-        1: True,
-        2: True,
-        3: False,
-        4: True,
-        5: True,
-        6: True,
-        7: False
-    }
-
-    # хранит словарь, где ключ - ступень, значение - смещение на: True - тон, False - полтона
-    MINOR_STEPS: dict[int, bool] = {
-        1: True,
-        2: False,
-        3: True,
-        4: True,
-        5: False,
-        6: True,
-        7: True
-    }
 
     def get_natural_chord(self) -> list[k.Key]:
         """
@@ -57,14 +36,15 @@ class Gamma:
     def get_step(self, step: int) -> k.Key:
         """
         Возвращает выбранную ступень гаммы
+        TODO: надо бы сделать его рекурсивным, но мне пока лень
         """
         if step in range(8):
             if not step:
                 return self._key
             current_step: k.Key = self._key
-            steps_type: dict[int, bool] = Gamma.MAJOR_STEPS if self._major else Gamma.MINOR_STEPS
+            steps_type: dict[int, int] = self._gamma_type.value
             for i in range(1, step + 1):
-                current_step = current_step.step_up_by_tone() if steps_type[i] else current_step.step_up_by_half_tone()
+                current_step = current_step.step_by_sub_tones_count(steps_type[i])
             return current_step
         else:
             raise ValueError(f"Ступень {step} должна быть в диапазоне от 1 до 7")
@@ -101,7 +81,7 @@ class Gamma:
     def __str__(self) -> str:
         return str([str(key_item) for key_item in self.get_key_list()])
 
-    def __init__(self, key: k.Key | ke.KeyEnum, major: bool = False) -> None:
+    def __init__(self, key: k.Key | ke.KeyEnum, major: ge.GammaTypesEnum = ge.GammaTypesEnum.major_gamma) -> None:
         self._key = key if type(key) is k.Key else key.value
-        self._major = major
+        self._gamma_type = major
         self._generate_full_gamma()
