@@ -157,9 +157,9 @@ class KeyEnum(enum.Enum):
         """
         Получение экземпляра ноты по её midi номеру
         """
-        for key in KeyEnum:
-            if midi_num in key.value.midi_nums:
-                return key.value
+        for key_item in KeyEnum:
+            if midi_num in key_item.value.midi_nums:
+                return key_item.value
         return None
 
     @staticmethod
@@ -167,7 +167,7 @@ class KeyEnum(enum.Enum):
         """
         Получение экземпляра ноты по её названию
         """
-        for key in KeyEnum:
-            if key.value.name == key_name:
-                return key.value
+        for key_item in KeyEnum:
+            if key_item.value.name == key_name:
+                return key_item.value
         return None
