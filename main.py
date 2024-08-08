@@ -2,19 +2,20 @@ from data.gamma import Gamma
 from data import chord as c
 from data.atomic import key as k
 from data.atomic import keysenum as ke
+from data import gammatypesenum as ge
 
 
 # проверка гамм
 def main0() -> None:
-    g: Gamma = Gamma(ke.KeyEnum.G, True)
-    print("Соль мажор: ", end="")
+    g: Gamma = Gamma(ke.KeyEnum.C, ge.GammaTypesEnum.major_gamma)
+    print("До мажор: ", end="")
     print(str(g))
     print("Натуральный аккорд: " + str([str(c) for c in g.get_natural_chord()]))
-    print("Септаккорд" + str([str(c) for c in g.get_cept_chord()]))
+    print("Септаккорд: " + str([str(c) for c in g.get_cept_chord()]))
     print("Квинта: " + str([str(c) for c in g.get_quint()]))
 
-    g = Gamma(ke.KeyEnum.G, major=False)
-    print("Соль минор: ", end="")
+    g = Gamma(ke.KeyEnum.C, major=ge.GammaTypesEnum.minor_gamma)
+    print("До минор: ", end="")
     print(str(g))
     print("Натуральный аккорд: " + str([str(c) for c in g.get_natural_chord()]))
     print("Септаккорд: " + str([str(c) for c in g.get_cept_chord()]))
@@ -36,5 +37,5 @@ def main1() -> None:
 main: list = [main0, main1]
 
 if __name__ == "__main__":
-    selected_main: int = 1
+    selected_main: int = 0
     main[selected_main]()
