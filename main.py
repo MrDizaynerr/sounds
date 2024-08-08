@@ -26,8 +26,9 @@ def main0():
 def main1():
     chord_c_keys: list[k.Key] = [
         ke.KeyEnum.C.value,
-        ke.KeyEnum.E.value,
-        ke.KeyEnum.G.value
+        ke.KeyEnum.Dd.value,
+        ke.KeyEnum.G.value,
+        ke.KeyEnum.Ad.value
     ]
     chord_c: c.Chord = c.Chord(chord_c_keys)
     print(f"Аккорд: {chord_c}")

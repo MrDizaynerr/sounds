@@ -14,9 +14,14 @@ class Chord:
             raise ValueError(f"Аккорд не может состоять менее, чем из двух нот ({key_len})!")
         self.keys = keys
         self.name = keys[0].name
-        if key_len == 3:
-            if keys[1] - keys[0] == 3:
+        if key_len > 2:
+            first_second_difference: int = keys[1] - keys[0]
+            if first_second_difference == 3:
                 self.name += "m"
+            if key_len == 4:
+                third_four_difference: int = keys[3] - keys[2]
+                if third_four_difference == 3:
+                    self.name += "7"
 
     def __str__(self):
         return self.name
