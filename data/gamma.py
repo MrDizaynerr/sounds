@@ -8,11 +8,11 @@ class Gamma:
     """
 
     # тональность
-    key: k.Key
+    _key: k.Key
     # мажорность. True - мажорная гамма, False - минорная гамма 
-    major: bool
+    _major: bool
     # все ноты тональности
-    key_list: list[k.Key]
+    _key_list: list[k.Key]
 
     # хранит словарь, где ключ - ступень, значение - смещение на количество тонов для мажорной гаммы
     MAJOR_STEPS: dict[int, bool] = {
@@ -60,9 +60,9 @@ class Gamma:
         """
         if step in range(8):
             if not step:
-                return self.key
-            current_step: k.Key = self.key
-            steps_type: dict[int, bool] = Gamma.MAJOR_STEPS if self.major else Gamma.MINOR_STEPS
+                return self._key
+            current_step: k.Key = self._key
+            steps_type: dict[int, bool] = Gamma.MAJOR_STEPS if self._major else Gamma.MINOR_STEPS
             for i in range(1, step + 1):
                 current_step = current_step.step_up_by_tone() if steps_type[i] else current_step.step_up_by_half_tone()
             return current_step
@@ -73,13 +73,13 @@ class Gamma:
         """
         Получает всю гамму
         """
-        return self.key_list
+        return self._key_list
 
     def get_key(self) -> k.Key:
         """
         Получает тональность гаммы
         """
-        return self.key
+        return self._key
 
     def is_major(self) -> bool:
         """
@@ -96,12 +96,12 @@ class Gamma:
         for i in range(8):
             step: k.Key = self.get_step(i)
             key_list.append(step)
-        self.key_list = key_list
+        self._key_list = key_list
 
     def __str__(self) -> str:
         return str([str(key_item) for key_item in self.get_key_list()])
 
     def __init__(self, key: k.Key | ke.KeyEnum, major: bool = False) -> None:
-        self.key = key if type(key) is k.Key else key.value
-        self.major = major
+        self._key = key if type(key) is k.Key else key.value
+        self._major = major
         self._generate_full_gamma()
