@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from synthesing import measure as m
 
 
 class IMeasureGenerator(ABC):
@@ -8,7 +9,7 @@ class IMeasureGenerator(ABC):
     _size: int
 
     @abstractmethod
-    def generate_tact(self):
+    def generate_tact(self) -> m.Measure:
         """
         Генерирует целый такт нужного размера
         """
@@ -24,5 +25,5 @@ class IMeasureGenerator(ABC):
         """
         return [.5 for _ in range(sub_beats_count)]
 
-    def __init__(self, size: int):
+    def __init__(self, size: int) -> None:
         self._size = size
