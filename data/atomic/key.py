@@ -9,33 +9,43 @@ class Key:
     # список с кодами для разных октав данной ноты
     midi_nums: list[int]
 
+    def step_up_by_sub_tones_count(self, sub_tones_count: int) -> "Key":
+        """
+        Получить ноту на заданное количество полутонов выше
+        """
+        from data.atomic import keysenum as ke
+        return ke.KeyEnum.by_midi_num((self.midi_nums[0] + sub_tones_count) % 12 + 12)
+
+    def step_down_by_sub_tones_count(self, sub_tones_count: int) -> "Key":
+        """
+        Получить ноту на заданное количество полутонов выше
+        """
+        from data.atomic import keysenum as ke
+        return ke.KeyEnum.by_midi_num((self.midi_nums[0] - sub_tones_count) % 12 + 12)
+
     def step_up_by_tone(self) -> "Key":
         """
         Получить ноту на тон выше
         """
-        from data.atomic import keysenum as ke
-        return ke.KeyEnum.by_midi_num((self.midi_nums[0] + 2) % 12 + 12)
+        return self.step_up_by_sub_tones_count(2)
 
     def step_up_by_half_tone(self) -> "Key":
         """
         Получить ноту на полтона выше
         """
-        from data.atomic import keysenum as ke
-        return ke.KeyEnum.by_midi_num((self.midi_nums[0] + 1) % 12 + 12)
+        return self.step_up_by_sub_tones_count(1)
 
     def step_down_by_tone(self) -> "Key":
         """
-        Получить ноту на тон выше
+        Получить ноту на тон ниже
         """
-        from data.atomic import keysenum as ke
-        return ke.KeyEnum.by_midi_num((self.midi_nums[0] - 2) % 12 + 12)
+        return self.step_down_by_sub_tones_count(2)
 
     def step_down_by_half_tone(self) -> "Key":
         """
-        Получить ноту на полтона выше
+        Получить ноту на полтона ниже
         """
-        from data.atomic import keysenum as ke
-        return ke.KeyEnum.by_midi_num((self.midi_nums[0] - 1) % 12 + 12)
+        return self.step_up_by_sub_tones_count(1)
 
     def __sub__(self, other: "Key") -> int:
         """

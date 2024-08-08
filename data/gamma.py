@@ -44,7 +44,7 @@ class Gamma:
             current_step: k.Key = self._key
             steps_type: dict[int, int] = self._gamma_type.value
             for i in range(1, step + 1):
-                current_step = current_step.step_by_sub_tones_count(steps_type[i])
+                current_step = current_step.step_up_by_sub_tones_count(steps_type[i])
             return current_step
         else:
             raise ValueError(f"Ступень {step} должна быть в диапазоне от 1 до 7")
