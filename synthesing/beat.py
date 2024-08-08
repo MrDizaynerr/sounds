@@ -15,6 +15,7 @@ class Beat:
     def in_gamma(self, gamma: g.Gamma) -> tuple[bool, k.Key | None]:
         """
         Проверяет, все ли ноты такта принадлежат заданной гамме
+        TODO: надо бы переработать это. Потому что сейчас оно точно не покрывает все случаи. Те же септы тут упадут в False. Или я просто чего то не понимаю
         """
         for key in self._keys:
             if key not in gamma.get_key_list():
