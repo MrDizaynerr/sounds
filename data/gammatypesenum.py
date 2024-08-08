@@ -5,6 +5,7 @@ class GammaTypesEnum(enum.Enum):
     """
     Перечисление, которое хранит в себе типы гамм и информацию о смещениях тонов для каждой их ступени
     """
+    # мажорная гамма
     major_gamma: dict[int, int] = {
         1: 2,
         2: 2,
@@ -14,6 +15,7 @@ class GammaTypesEnum(enum.Enum):
         6: 2,
         7: 1
     }
+    # минорная гамма
     minor_gamma: dict[int, int] = {
         1: 2,
         2: 1,
