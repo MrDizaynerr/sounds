@@ -1,12 +1,11 @@
 from data.gamma import Gamma
-from data.atomic import keysenum as ke
 from data import chord as c
 from data.atomic import key as k
 from data.atomic import keysenum as ke
 
 
 # проверка гамм
-def main0():
+def main0() -> None:
     g: Gamma = Gamma(ke.KeyEnum.G, True)
     print("Соль мажор: ", end="")
     print(str(g))
@@ -23,7 +22,7 @@ def main0():
 
 
 # проверка аккордов
-def main1():
+def main1() -> None:
     chord_c_keys: list[k.Key] = [
         ke.KeyEnum.C.value,
         ke.KeyEnum.Dd.value,
