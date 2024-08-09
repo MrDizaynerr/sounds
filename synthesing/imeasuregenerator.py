@@ -4,8 +4,9 @@ from synthesing import measure as m
 
 class IMeasureGenerator(ABC):
     """
-    Размер такта в битах
+    Генератор такта. Выполняет генерацию такта
     """
+    # размер такта в битах
     _size: int
 
     @abstractmethod
