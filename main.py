@@ -1,7 +1,7 @@
 import random
 
-from data.atomic.keys import Key
-from data.atomic.keys_enum import KeyEnum
+from data.atomic.key import Key
+from data.atomic.keysenum import KeyEnum
 from gamma import Gamma
 from synth import Synth
 from synth import generate_random_midi_melody_from_sequence
@@ -58,8 +58,8 @@ def main2():
 
 def main3():
     from midiutil import MIDIFile
-    chords: list[Key] = [KeyEnum.by_name(x) for x in random.choices(Gamma("E").get_minor(), k=4)]
-    degrees = generate_random_midi_melody_from_sequence(chords)
+    chords: list[Key] = [KeyEnum.by_name(x) for x in random.choices(Gamma("E").get_major(), k=4)]
+    degrees = generate_random_midi_melody_from_sequence(chords, max_notes_in_beat=30)
     track = 0
     channel = 0
     time = 0
